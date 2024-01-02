@@ -1,0 +1,68 @@
+#server:
+#  servlet:
+#    session:
+#      timeout: 61
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  web:
+    resources:
+      add-mappings: false # add-mappings을 false로 설정하면 스프링에서 기본적으로 제공하는 정적자원요청에 대한 매핑을 사용하지 않기 때문에 잘못된 URL로 요청하더라도 SimpleUrlHandlerMapping가 해당 요청을 받지 않고 정상적으로 NoHandlerFoundException을 발생시킨다.
+#  cache:
+#    type: redis
+#    redis:
+#      cache-null-values: true
+  data:
+    redis:
+      host: localhost
+      port: 6379 # default임
+  session:
+    store-type: redis
+  datasource:
+    url: jdbc:mysql://localhost:3306/shpay?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+    username: shpay
+    password: shpay
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 500
+        dialect:
+          storage_engine: innodb
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAZITYIJKEQJRHMCBN
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    s3:
+      bucket: seongho-s3-bucket
+
+
+openbanking:
+  client-id: d7a84cca-d7de-4144-95a6-abbef4fec148
+  client-secret: 4ae712c1-931d-415d-9d90-ec0418eee27c
+  redirect-uri: http://localhost:8888/authResult
+
+
+#logging:
+#  level:
+#    org.hibernate:
+#      SQL: debug
+#      type.descriptor.sql: trace

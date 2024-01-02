@@ -1,9 +1,0 @@
-server:
-  port: 7777
-
-spring:
-  thymeleaf:
-    cache: false
-  profiles:
-#    include: real
-    include: local
